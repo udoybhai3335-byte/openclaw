@@ -138,7 +138,7 @@ export function createFollowupRunner(params: {
 
   return async (queued: FollowupRun) => {
     const replySessionKey = queued.run.sessionKey ?? sessionKey;
-    console.log("[auto-trace] followup prompt:", queued.prompt?.substring(0, 500));
+    console.log("[auto-trace] followup FULL prompt:", queued.prompt);
     const replyOperation = createReplyOperation({
       sessionId: queued.run.sessionId,
       sessionKey: replySessionKey ?? "",
@@ -314,8 +314,8 @@ export function createFollowupRunner(params: {
 
       const payloadArray = runResult.payloads ?? [];
       console.log(
-        "[auto-trace] followup response:",
-        payloadArray.map((p) => p.text?.substring(0, 200)),
+        "[auto-trace] followup FULL response:",
+        payloadArray.map((p) => p.text),
       );
       if (payloadArray.length === 0) {
         return;
